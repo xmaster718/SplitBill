@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Вход — SplitBill</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <h1>SplitBill</h1>
+    <p class="subtitle">Войдите в свой аккаунт</p>
+
+    <div class="card">
+      <form id="login-form">
+        <div class="form-row">
+          <input type="email" id="email" placeholder="Email" required />
+        </div>
+        <div class="form-row">
+          <input type="password" id="password" placeholder="Пароль" required />
+        </div>
+        <button type="submit">Войти</button>
+      </form>
+      <p class="error" id="error"></p>
+      <p class="link-row">Нет аккаунта? <a href="register.html">Зарегистрироваться</a></p>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
