@@ -15,10 +15,22 @@ form.addEventListener("submit", async (e) => {
       body: JSON.stringify({ email, password }),
     });
 
-    if (!res.ok) throw new Error("Неверный email или пароль");
+    if (!res.ok) {
+      throw new Error("Неверный email или пароль");
+    }
 
-    const data = await res.json(); // ожидаем { token, user }
-    saveSession(data.token, data.user);
+    const payload = await res.json();
+    const token = payload.token || payload.accessToken || payload.data?.token || payload.user?.token;
+    const user = payload.user || payload.profile || payload.data?.user || {
+      name: email.split("@")[0],
+      email,
+    };
+
+    if (!token) {
+      throw new Error("Сервер не вернул токен авторизации");
+    }
+
+    saveSession(token, user);
     window.location.href = "groups.html";
   } catch (err) {
     errorEl.textContent = err.message || "Ошибка входа. Backend запущен?";

@@ -9,8 +9,11 @@
 <body>
   <div class="app">
     <div class="top-bar">
-      <h1>Мои группы</h1>
-      <button class="secondary" id="logout-btn">Выйти</button>
+      <div>
+        <h1>Мои группы</h1>
+        <p class="subtitle">Управляйте нагрузкой и расходами команды</p>
+      </div>
+      <button class="secondary" id="logout-btn" type="button">Выйти</button>
     </div>
 
     <div class="card">
@@ -24,6 +27,9 @@
     </div>
 
     <div class="card">
+      <div class="toolbar">
+        <input id="group-search" type="search" placeholder="Поиск по названию группы" aria-label="Поиск группы" />
+      </div>
       <ul id="group-list"></ul>
       <p class="empty" id="empty-state" style="display:none;">У вас пока нет групп</p>
     </div>
