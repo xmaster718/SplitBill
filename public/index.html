@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece2cd">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>SplitBill — сервис для сплита счёта и учёта общих расходов</title>
+<meta name="description" content="Бесплатный сервис для деления счёта и общих расходов в поездке, с друзьями и дома: группы, учёт, кто за что платил, расчёт «кто кому должен» и минимум переводов.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://splitbill.example.com/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="SplitBill">
+<meta property="og:title" content="SplitBill — делите расходы без споров">
+<meta property="og:description" content="Группы, общие расходы, расчёт «кто кому должен» и минимум переводов. Бесплатно.">
+<meta property="og:url" content="https://splitbill.example.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "name": "SplitBill",
+      "url": "https://splitbill.example.com/",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Any",
+      "inLanguage": "ru",
+      "description": "Сервис для сплита счёта и учёта общих расходов в группах.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "KZT" }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Как поделить счёт поровну?", "acceptedAnswer": { "@type": "Answer", "text": "Введите сумму и число людей в калькуляторе на главной странице или создайте группу и отметьте участников расхода — сервис разделит сумму до копейки." } },
+        { "@type": "Question", "name": "Нужно ли друзьям регистрироваться?", "acceptedAnswer": { "@type": "Answer", "text": "Нет. Участника можно добавить просто по имени. Если же друг зарегистрируется, он войдёт в группу по коду приглашения и увидит все расходы." } },
+        { "@type": "Question", "name": "Как работает расчёт «кто кому должен»?", "acceptedAnswer": { "@type": "Answer", "text": "Сервис считает баланс каждого участника и предлагает минимальное число переводов, которые закрывают все долги." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<div class="container wide">
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark"></span>SplitBill</a>
+    <nav class="nav-links" aria-label="Разделы">
+      <a href="#calculator">Калькулятор</a>
+      <a href="#features">Возможности</a>
+      <a href="#how">Как это работает</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="right">
+      <a class="btn btn-secondary btn-sm" id="nav-login" href="login.html">Войти</a>
+      <a class="btn btn-sm" id="nav-register" href="register.html">Регистрация</a>
+      <a class="btn btn-sm hidden" id="nav-app" href="groups.html">Мои группы</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Делите расходы без споров и таблиц</h1>
+      <p class="lead">Поездка, съём квартиры, ужин с друзьями: заносите траты в группу, а SplitBill сам посчитает, кто кому и сколько должен, и предложит минимум переводов.</p>
+      <div class="actions">
+        <a class="btn btn-lg" id="cta-primary" href="register.html">Начать бесплатно</a>
+        <a class="btn btn-secondary btn-lg" href="#calculator">Быстрый калькулятор</a>
+      </div>
+    </section>
+
+    <section class="section" id="calculator">
+      <h2>Быстрый калькулятор счёта</h2>
+      <div class="card calc">
+        <div>
+          <div class="field">
+            <label class="label" for="calc-bill">Сумма счёта, ₸</label>
+            <input class="input" id="calc-bill" inputmode="decimal" placeholder="Например, 18500" autocomplete="off">
+          </div>
+          <div class="row">
+            <div class="field">
+              <label class="label" for="calc-tip">Чаевые, %</label>
+              <input class="input" id="calc-tip" type="number" min="0" max="100" value="10">
+            </div>
+            <div class="field">
+              <label class="label" for="calc-people">Человек</label>
+              <input class="input" id="calc-people" type="number" min="1" max="100" value="4">
+            </div>
+          </div>
+        </div>
+        <div class="calc-result" aria-live="polite">
+          <div class="muted small">С каждого</div>
+          <div class="big" id="calc-each">—</div>
+          <p class="muted small" id="calc-note">Введите сумму счёта.</p>
+          <p class="small">Нужно считать по каждому расходу и помнить, кто что оплатил? <a href="register.html">Создайте группу</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <h2>Что умеет SplitBill</h2>
+      <div class="features">
+        <article class="feature"><h3>Группы и приглашения</h3><p>Создайте группу и позовите друзей по короткому коду или ссылке. Участников без аккаунта можно добавить по имени.</p></article>
+        <article class="feature"><h3>Поровну или по суммам</h3><p>Делите расход между выбранными людьми поровну либо задайте точную долю каждого.</p></article>
+        <article class="feature"><h3>Кто кому должен</h3><p>Баланс каждого участника считается автоматически, до копейки и без накопления ошибок округления.</p></article>
+        <article class="feature"><h3>Минимум переводов</h3><p>Вместо десятка встречных долгов сервис предлагает короткий список переводов, которые закрывают всё.</p></article>
+        <article class="feature"><h3>Отметка о переводе</h3><p>Перевели деньги — нажмите одну кнопку, и долг исчезнет из расчёта. История остаётся в группе.</p></article>
+        <article class="feature"><h3>Поиск и фильтры</h3><p>Найдите нужный расход по описанию, отсортируйте по сумме или дате, отфильтруйте по плательщику.</p></article>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <h2>Как это работает</h2>
+      <div class="steps">
+        <div class="step"><h3>Создайте группу</h3><p class="muted">Назовите её, например «Поездка в Алматы», и пригласите участников.</p></div>
+        <div class="step"><h3>Добавляйте расходы</h3><p class="muted">Укажите сумму, кто заплатил и между кем она делится.</p></div>
+        <div class="step"><h3>Закройте долги</h3><p class="muted">Смотрите, кто кому переводит, и отмечайте переводы по мере оплаты.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <h2>Частые вопросы</h2>
+      <details><summary>Как поделить счёт поровну?</summary><p>Введите сумму и число людей в калькуляторе выше. Для регулярных трат создайте группу: отметьте участников расхода, и сервис разделит сумму до копейки.</p></details>
+      <details><summary>Нужно ли друзьям регистрироваться?</summary><p>Нет. Участника можно добавить просто по имени. Если друг зарегистрируется, он войдёт в группу по коду приглашения и увидит все расходы.</p></details>
+      <details><summary>Как работает расчёт «кто кому должен»?</summary><p>Для каждого участника считается разница между тем, что он заплатил, и суммой его долей. Затем сервис подбирает минимальный набор переводов, который обнуляет все балансы.</p></details>
+      <details><summary>Мои данные в безопасности?</summary><p>Пароли хранятся только в виде хэша, доступ к группе есть только у её участников, а весь вводимый текст отображается как текст и не может выполнить код на странице.</p></details>
+    </section>
+  </main>
+
+  <footer class="footer">SplitBill — учебный проект курса Advanced Backend &amp; DevOps.</footer>
+</div>
+<script src="js/common.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>

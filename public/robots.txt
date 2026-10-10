@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Замените адрес на адрес вашего сайта (см. README → «Как попасть в Google»)
+Sitemap: https://splitbill.example.com/sitemap.xml

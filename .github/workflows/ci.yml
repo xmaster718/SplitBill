@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: splitbill
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: pdo_mysql, mbstring
+
+      - name: Проверка синтаксиса PHP
+        run: find public -name "*.php" -print0 | xargs -0 -n1 php -l
+
+      - name: Проверка синтаксиса JavaScript
+        run: for f in public/js/*.js; do node --check "$f"; done
+
+      - name: Unit-тесты
+        run: php tests/unit_test.php
+
+      - name: Импорт схемы БД
+        run: mysql -h 127.0.0.1 -uroot -proot splitbill < sql/schema.sql
+
+      - name: Запуск приложения и интеграционные тесты
+        env:
+          DB_HOST: 127.0.0.1
+          DB_NAME: splitbill
+          DB_USER: root
+          DB_PASS: root
+        run: |
+          php -S 127.0.0.1:8080 -t public > server.log 2>&1 &
+          sleep 3
+          curl --fail http://127.0.0.1:8080/api/health.php
+          python3 tests/integration_test.py http://127.0.0.1:8080
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Сборка Docker-образа
+        run: docker build -t splitbill .

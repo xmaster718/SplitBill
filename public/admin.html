@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece2cd">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Админ-панель — SplitBill</title>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="container wide">
+  <header class="topbar">
+    <a class="brand" href="groups.html"><span class="brand-mark"></span>SplitBill</a>
+    <div class="right">
+      <span class="muted small" id="user-name"></span>
+      <a class="btn btn-secondary btn-sm" href="groups.html">К моим группам</a>
+      <button class="btn btn-secondary btn-sm" id="logout-btn" type="button">Выйти</button>
+    </div>
+  </header>
+  <main>
+    <h1>Админ-панель</h1>
+    <p class="muted">Управление пользователями и группами сервиса.</p>
+    <div class="stats" id="stats"></div>
+    <section class="card">
+      <h2>Пользователи</h2>
+      <div class="table-wrap"><table id="users-table"></table></div>
+    </section>
+    <section class="card">
+      <h2>Группы</h2>
+      <div class="table-wrap"><table id="groups-table"></table></div>
+    </section>
+  </main>
+</div>
+<script src="js/common.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

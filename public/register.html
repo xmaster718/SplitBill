@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece2cd">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Регистрация — SplitBill</title>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<main class="container narrow">
+  <p class="center"><a class="brand" href="index.html"><span class="brand-mark"></span>SplitBill</a></p>
+  <h1 class="center">Регистрация</h1>
+  <p class="muted center">Создайте аккаунт, чтобы вести общие расходы</p>
+  <form class="card" id="register-form" novalidate>
+    <div class="field">
+      <label class="label" for="name">Имя</label>
+      <input class="input" id="name" name="name" autocomplete="name" maxlength="60" required>
+    </div>
+    <div class="field">
+      <label class="label" for="email">Email</label>
+      <input class="input" id="email" name="email" type="email" autocomplete="email" required>
+    </div>
+    <div class="field">
+      <label class="label" for="password">Пароль (от 8 символов)</label>
+      <input class="input" id="password" name="password" type="password" autocomplete="new-password" required>
+    </div>
+    <div class="field">
+      <label class="label" for="password2">Повторите пароль</label>
+      <input class="input" id="password2" name="password2" type="password" autocomplete="new-password" required>
+    </div>
+    <button class="btn btn-block" type="submit">Создать аккаунт</button>
+    <p class="form-error" id="form-error" role="alert"></p>
+    <p class="center small muted">Уже есть аккаунт? <a href="login.html">Войти</a></p>
+  </form>
+</main>
+<script src="js/common.js"></script>
+<script src="js/register.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+# Запуск всего проекта одной командой:  docker compose up --build
+# Сайт: http://localhost:8080
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: splitbill
+      MYSQL_USER: splitbill
+      MYSQL_PASSWORD: ${DB_PASS:-splitbill_pass}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASS:-root_pass}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro   # схема применяется при первом запуске
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-p${DB_ROOT_PASS:-root_pass}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  web:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_NAME: splitbill
+      DB_USER: splitbill
+      DB_PASS: ${DB_PASS:-splitbill_pass}
+    ports:
+      - "8080:80"
+
+volumes:
+  db_data:

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece2cd">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Группа — SplitBill</title>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="container">
+  <header class="topbar">
+    <a class="brand" href="groups.html"><span class="brand-mark"></span>SplitBill</a>
+    <div class="right">
+      <span class="muted small" id="user-name"></span>
+      <a class="btn btn-secondary btn-sm hidden" id="admin-link" href="admin.html">Админ-панель</a>
+      <button class="btn btn-secondary btn-sm" id="logout-btn" type="button">Выйти</button>
+    </div>
+  </header>
+
+  <main>
+    <a class="back" href="groups.html">← Все группы</a>
+    <div class="title-row">
+      <h1 id="group-title">Загрузка…</h1>
+      <div class="invite">
+        <span class="muted">Код приглашения:</span> <code id="invite-code">········</code>
+        <button class="btn btn-secondary btn-sm" id="copy-code" type="button">Код</button>
+        <button class="btn btn-secondary btn-sm" id="copy-link" type="button">Ссылка</button>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-head"><h2>Баланс</h2><span class="muted small" id="balance-total"></span></div>
+      <ul class="list" id="balances"></ul>
+      <div id="settlements"></div>
+    </section>
+
+    <section class="card">
+      <h2>Новый расход</h2>
+      <form id="expense-form" novalidate>
+        <div class="field">
+          <label class="label" for="description">Описание</label>
+          <input class="input" id="description" maxlength="120" placeholder="Например, такси из аэропорта" autocomplete="off">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="label" for="amount">Сумма, ₸</label>
+            <input class="input" id="amount" inputmode="decimal" placeholder="1500" autocomplete="off">
+          </div>
+          <div class="field">
+            <label class="label" for="spent_on">Дата</label>
+            <input class="input" id="spent_on" type="date">
+          </div>
+        </div>
+        <div class="field">
+          <label class="label" for="paid_by">Кто заплатил</label>
+          <select class="input" id="paid_by"></select>
+        </div>
+        <div class="field">
+          <span class="label">Как делим</span>
+          <div class="choice">
+            <label><input type="radio" name="split" value="equal" checked> Поровну</label>
+            <label><input type="radio" name="split" value="exact"> По суммам</label>
+          </div>
+          <div id="participants"></div>
+          <div class="split-hint" id="split-hint"></div>
+        </div>
+        <button class="btn btn-block" type="submit">Добавить расход</button>
+        <p class="form-error" id="expense-error" role="alert"></p>
+      </form>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>История</h2><span class="muted small" id="expenses-total"></span></div>
+      <div class="filters">
+        <input class="input" id="search" type="search" placeholder="Поиск по описанию" aria-label="Поиск по описанию">
+        <select class="input" id="filter-payer" aria-label="Фильтр по плательщику"></select>
+        <select class="input" id="sort" aria-label="Сортировка">
+          <option value="date_desc">Сначала новые</option>
+          <option value="date_asc">Сначала старые</option>
+          <option value="amount_desc">Дороже сначала</option>
+          <option value="amount_asc">Дешевле сначала</option>
+        </select>
+      </div>
+      <ul class="list" id="expense-list"></ul>
+      <div class="pager">
+        <button class="btn btn-secondary btn-sm" id="prev" type="button">← Назад</button>
+        <span class="muted small" id="page-info"></span>
+        <button class="btn btn-secondary btn-sm" id="next" type="button">Вперёд →</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Участники</h2><span class="muted small" id="members-count"></span></div>
+      <ul class="list" id="member-list"></ul>
+      <form id="member-form" class="row" novalidate>
+        <div class="field">
+          <label class="label" for="member-name">Добавить участника без аккаунта</label>
+          <input class="input" id="member-name" maxlength="60" placeholder="Имя, например Аружан" autocomplete="off">
+        </div>
+        <button class="btn btn-secondary" type="submit">Добавить</button>
+      </form>
+    </section>
+
+    <p class="center hidden" id="danger-zone"><button class="link-btn danger" id="delete-group" type="button">Удалить группу</button></p>
+  </main>
+</div>
+<script src="js/common.js"></script>
+<script src="js/group.js"></script>
+</body>
+</html>

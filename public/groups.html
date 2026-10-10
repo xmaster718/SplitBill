@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ece2cd">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Мои группы — SplitBill</title>
+<meta name="robots" content="noindex">
+</head>
+<body>
+<div class="container">
+  <header class="topbar">
+    <a class="brand" href="groups.html"><span class="brand-mark"></span>SplitBill</a>
+    <div class="right">
+      <span class="muted small" id="user-name"></span>
+      <a class="btn btn-secondary btn-sm hidden" id="admin-link" href="admin.html">Админ-панель</a>
+      <button class="btn btn-secondary btn-sm" id="logout-btn" type="button">Выйти</button>
+    </div>
+  </header>
+
+  <main>
+    <h1>Мои группы</h1>
+    <p class="muted">Группа — это поездка, квартира или компания, где вы делите расходы.</p>
+
+    <section class="card">
+      <h2>Новая группа</h2>
+      <form id="create-form" class="row" novalidate>
+        <div class="field">
+          <label class="label" for="group-name">Название</label>
+          <input class="input" id="group-name" maxlength="80" placeholder="Например, Поездка в Алматы" required>
+        </div>
+        <button class="btn" type="submit">Создать</button>
+      </form>
+      <p class="form-error" id="create-error" role="alert"></p>
+    </section>
+
+    <section class="card">
+      <h2>Войти по коду приглашения</h2>
+      <form id="join-form" class="row" novalidate>
+        <div class="field">
+          <label class="label" for="join-code">Код из 8 символов</label>
+          <input class="input" id="join-code" maxlength="8" placeholder="K7M2QX9A" autocomplete="off" required>
+        </div>
+        <button class="btn btn-secondary" type="submit">Войти в группу</button>
+      </form>
+      <p class="form-error" id="join-error" role="alert"></p>
+    </section>
+
+    <section>
+      <div id="group-list"></div>
+    </section>
+  </main>
+</div>
+<script src="js/common.js"></script>
+<script src="js/groups.js"></script>
+</body>
+</html>
